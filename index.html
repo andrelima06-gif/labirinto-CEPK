@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Labirinto CEPK</title>
+  <meta name="claude:viewport-fit-sides" content="cover">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <main class="app">
+    <header class="top">
+      <h1>LABIRINTO CEPK</h1>
+      <div class="hud" aria-label="Placar">
+        <div class="stat"><span class="label">Fase</span><span class="value" id="hudLevel">1</span></div>
+        <div class="stat"><span class="label">Tempo</span><span class="value" id="hudTime">00:00</span></div>
+        <div class="stat"><span class="label">Meta ★★★</span><span class="value" id="hudPar">00:00</span></div>
+        <div class="stat"><span class="label">Vaga-lumes</span><span class="value glow" id="hudOrbs">0/0</span></div>
+        <div class="stat"><span class="label">Fôlego</span>
+          <div class="meter"><i id="stamina"></i></div>
+        </div>
+      </div>
+    </header>
+
+    <section class="stage">
+      <canvas id="game" aria-label="Labirinto escuro com o lobo e o monstro"></canvas>
+      <div class="overlay" id="overlay">
+        <div class="panel">
+          <img id="menuWolf" alt="Lobo do CEPK" hidden>
+          <h2 id="ovTitle"></h2>
+          <p id="ovText"></p>
+          <div class="stars" id="ovStars" aria-live="polite" hidden></div>
+          <p class="dim" id="ovExtra" hidden></p>
+          <div class="levels" id="levels" aria-label="Escolher fase" hidden></div>
+          <div class="btns">
+            <button class="btn" id="ovBtn" type="button">JOGAR</button>
+            <button class="btn alt" id="ovBtn2" type="button" hidden>MENU</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="help">
+      <span><kbd>↑</kbd><kbd>↓</kbd><kbd>←</kbd><kbd>→</kbd> ou <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd>
+        andar</span>
+      <span><kbd>Shift</kbd> correr (gasta fôlego)</span>
+      <span><kbd>P</kbd> pausar</span>
+      <span><kbd>M</kbd> som</span>
+      <span>Cada vaga-lume amplia sua visão até o fim da fase.</span>
+      <span>Livro roxo: imortal por 8 s (o monstro que encostar fica atordoado). Raio amarelo: mais velocidade por 7
+        s.</span>
+      <span>Os monstros enxergam num cone iluminado: fique fora da mira e não corra perto deles.</span>
+      <span>Estrelas: ★ escapar · ★ pegar todos os vaga-lumes · ★ bater a meta de tempo.</span>
+    </div>
+
+    <div class="pad" aria-label="Controles de toque">
+      <div class="dpad">
+        <button class="u" data-act="up" aria-label="Subir" type="button">▲</button>
+        <button class="l" data-act="left" aria-label="Esquerda" type="button">◀</button>
+        <button class="r" data-act="right" aria-label="Direita" type="button">▶</button>
+        <button class="d" data-act="down" aria-label="Descer" type="button">▼</button>
+      </div>
+      <button class="run" data-act="sprint" aria-label="Correr" type="button">CORRER</button>
+    </div>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+
+</html>

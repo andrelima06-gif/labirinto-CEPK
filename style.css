@@ -1,0 +1,377 @@
+/* Layout: uma coluna central. Cabeçalho com placar, palco do jogo em 25:16, dicas de controle e, em telas de toque, um direcional. */
+:root {
+  --bg: #0a0d13;
+  --panel: #111722;
+  --line: #232f43;
+  --fg: #e8f0e4;
+  --muted: #8a9a94;
+  --accent: #6fd23f;
+  --accent-ink: #0a1405;
+  --accent-deep: #3b7a20;
+  --glow: #e3ff8a;
+  --danger: #ff4d4d;
+  --font-display: 'Press Start 2P', 'Courier New', monospace;
+  --font-body: 'VT323', 'Courier New', monospace;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.app {
+  max-width: 960px;
+  margin: 0 auto;
+  padding-block: 16px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid;
+  gap: 12px;
+}
+
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px 24px;
+}
+
+h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  text-wrap: balance;
+}
+
+.hud {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 8px 22px;
+}
+
+.stat {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.stat .label {
+  font-family: var(--font-display);
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stat .value {
+  font-size: 28px;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat .value.glow {
+  color: var(--glow);
+}
+
+.meter {
+  width: 120px;
+  height: 14px;
+  border: 2px solid var(--line);
+  background: var(--panel);
+  padding: 1px;
+}
+
+.meter>i {
+  display: block;
+  height: 100%;
+  width: 100%;
+  background: var(--accent);
+  transform-origin: left center;
+}
+
+.meter.tired>i {
+  background: var(--danger);
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 25 / 16;
+  max-width: 100%;
+  background: #000;
+  border: 2px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.stage canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  background: rgba(3, 5, 9, 0.8);
+  overflow-y: auto;
+}
+
+.panel {
+  width: min(100%, 470px);
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+  padding: 16px 18px;
+  background: var(--panel);
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+}
+
+.panel img {
+  width: 58px;
+  height: auto;
+  max-width: 100%;
+}
+
+.panel h2 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.4;
+  text-wrap: balance;
+}
+
+.panel p {
+  margin: 0;
+  color: var(--fg);
+}
+
+.panel p.dim {
+  color: var(--muted);
+  font-size: 20px;
+}
+
+.btn {
+  font-family: var(--font-display);
+  font-size: 12px;
+  color: var(--accent-ink);
+  background: var(--accent);
+  border: 0;
+  border-radius: 3px;
+  padding: 12px 18px;
+  box-shadow: 0 4px 0 var(--accent-deep);
+  cursor: pointer;
+}
+
+.btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.btn.alt {
+  color: var(--fg);
+  background: var(--panel);
+  border: 2px solid var(--line);
+  box-shadow: 0 4px 0 var(--line);
+}
+
+.panel p.dim {
+  white-space: pre-line;
+}
+
+.stars {
+  font-family: 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'DejaVu Sans', sans-serif;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  color: var(--glow);
+}
+
+.levels {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: 6px;
+}
+
+.lvl {
+  display: grid;
+  gap: 2px;
+  justify-items: center;
+  padding: 6px 2px;
+  font-family: var(--font-body);
+  color: var(--fg);
+  background: var(--bg);
+  border: 2px solid var(--line);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.lvl b {
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.lvl span {
+  font-family: 'Segoe UI Symbol', 'Noto Sans Symbols 2', 'DejaVu Sans', sans-serif;
+  font-size: 13px;
+  color: var(--glow);
+}
+
+.lvl:hover:not(:disabled) {
+  border-color: var(--accent);
+}
+
+.lvl:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.lvl:focus-visible {
+  outline: 3px solid var(--glow);
+  outline-offset: 2px;
+}
+
+.btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 var(--accent-deep);
+}
+
+.btn:focus-visible,
+.pad button:focus-visible {
+  outline: 3px solid var(--glow);
+  outline-offset: 3px;
+}
+
+.help {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  color: var(--muted);
+  font-size: 20px;
+}
+
+.help span {
+  min-width: 0;
+}
+
+kbd {
+  font-family: var(--font-display);
+  font-size: 9px;
+  color: var(--fg);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-bottom-width: 3px;
+  border-radius: 3px;
+  padding: 3px 5px;
+  margin-right: 2px;
+}
+
+.pad {
+  display: none;
+}
+
+@media (pointer: coarse) {
+  .pad {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+}
+
+.pad .dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 58px);
+  grid-template-rows: repeat(3, 58px);
+  gap: 4px;
+}
+
+.pad button {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--fg);
+  background: var(--panel);
+  border: 2px solid var(--line);
+  border-radius: 6px;
+  touch-action: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.pad button.on {
+  background: var(--accent-deep);
+  border-color: var(--accent);
+}
+
+.pad .u {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.pad .l {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.pad .r {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.pad .d {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.pad .run {
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  font-size: 10px;
+}
+
+@media (max-width: 520px) {
+  h1 {
+    font-size: 13px;
+  }
+
+  .stat .value {
+    font-size: 24px;
+  }
+
+  .panel h2 {
+    font-size: 13px;
+  }
+
+  .panel p {
+    font-size: 20px;
+  }
+}
